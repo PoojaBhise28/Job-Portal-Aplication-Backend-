@@ -28,7 +28,7 @@ namespace JobPortal.Repositories
             {
                 // Handle the exception here, such as logging or throwing a custom exception
                 // For demonstration purposes, rethrowing the exception
-                throw new Exception("An error occurred while saving the entity.", ex);
+                throw new Exception("An error occurred while saving the entity.", ex.InnerException);
             }
         }
 

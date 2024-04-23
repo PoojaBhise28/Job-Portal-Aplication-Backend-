@@ -41,6 +41,7 @@ namespace JobPortal.Api.Controllers
                 if (academicInfo == null)
                 {
                     return NotFound();
+
                 }
                 return Ok(academicInfo);
             }

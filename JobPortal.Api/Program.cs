@@ -20,7 +20,7 @@ builder.Services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"))
 
 builder.Services.AddDbContext<JobPortalDbContext>(options =>
 {
-    options.UseSqlServer(connectionString,b => b.MigrationsAssembly("JobPortal.Api"));
+    options.UseSqlServer(connectionString, b => b.MigrationsAssembly("JobPortal.Api"));
 
 });
 
@@ -55,6 +55,18 @@ builder.Services.AddScoped<IJwtService, JwtService>();
 
 //ServiceRegistration.AddScopedServices(builder.Services);
 
+// Add CORS services
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("EnableCORS", builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
+});
+
+
 // Add services to the container.
 
 var app = builder.Build();
@@ -80,6 +92,13 @@ app.MapGet("/weatherforecast", () =>
         .ToArray();
     return forecast;
 });
+
+// Configure the HTTP request pipeline.
+app.UseHttpsRedirection();
+
+// Enable CORS
+app.UseCors("EnableCORS");
+
 app.MapControllers();
 app.Run();
 

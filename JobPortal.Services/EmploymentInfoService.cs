@@ -1,4 +1,5 @@
-﻿using JobPortal.DTO;
+﻿
+using JobPortal.DTO;
 using JobPortal.IRepositories;
 using JobPortal.IServices;
 using JobPortal.Model;
